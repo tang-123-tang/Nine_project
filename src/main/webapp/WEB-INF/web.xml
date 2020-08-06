@@ -18,7 +18,9 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <!--过滤器 防止乱码-->
-
+    <listener>
+    <listener-class>com.group.utils.ServletContextListenerImpl</listener-class>
+    </listener>
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

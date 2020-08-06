@@ -114,7 +114,7 @@ appraisal is not null and appraisal !=''
       </if>
     </trim>
   </insert>
- <!-- <update id="updateByPrimaryKeySelective" parameterType="com.group.pojo.Borrowbooks" >
+  <update id="updateByPrimary" parameterType="com.group.pojo.Borrowbooks" >
     update borrowbooks
     <set >
       <if test="userid != null" >
@@ -134,7 +134,7 @@ appraisal is not null and appraisal !=''
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
-  </update>-->
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.group.pojo.Borrowbooks" >
     update borrowbooks
     set userId = #{userid,jdbcType=INTEGER},
@@ -147,8 +147,8 @@ appraisal is not null and appraisal !=''
   <select id="select" resultType="java.lang.Integer" parameterType="java.lang.Integer">
    SELECT COUNT(state) FROM borrowbooks WHERE userId=#{userid} and state=1
   </select>
-  <select id="selectByid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
- SELECT bookId FROM borrowbooks WHERE bookId=#{bookid}
+  <select id="selectByid" resultMap="BaseResultMap" parameterType="java.lang.Integer"  >
+ SELECT bookId FROM borrowbooks WHERE bookId=#{1} and userId=#{0}
   </select>
 
 

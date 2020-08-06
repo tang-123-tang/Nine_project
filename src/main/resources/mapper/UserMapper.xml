@@ -120,4 +120,14 @@
       total = #{total,jdbcType=INTEGER}
     where userId = #{userid,jdbcType=INTEGER}
   </update>
+
+  <!--  还一本书user->total减少1-->
+  <update id="totaldown" parameterType="java.lang.Integer">
+    UPDATE user SET total=total-1 WHERE userid=#{userid}
+  </update>
+  <!--  批量还书user->total减少-->
+  <update id="totaldowns" >
+    UPDATE user SET total=total-#{0} WHERE userid=#{1}
+  </update>
+
 </mapper>

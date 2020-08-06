@@ -16,4 +16,9 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User queryPersonByPersonName(String username);
+
+
+    int totaldown(Integer userid);
+
+    int totaldowns(Integer count, Integer userid);
 }

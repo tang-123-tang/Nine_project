@@ -23,4 +23,8 @@ public interface BookMapper {
     void update(Integer book);
 
     int del(List<String> list);
+    int totalup(Integer bookid);
+
+    int totalups(List<String> asList);
+
 }

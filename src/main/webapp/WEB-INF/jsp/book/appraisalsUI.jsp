@@ -84,7 +84,7 @@ function xiangx(){
         $.ajax({
             type:"post",
             url:"/brrowBook/appraisal.do",
-            dataType:"json",
+            dataType:"text",
             data:{"id":id,"appraisal":appraisal},
             success:function (info) {
                 /*alert(info.personName);

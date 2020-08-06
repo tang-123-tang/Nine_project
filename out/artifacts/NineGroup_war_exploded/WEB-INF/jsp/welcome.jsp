@@ -25,7 +25,7 @@
 </head>
 <body>
 	<div class="x-body">
-		<blockquote class="layui-elem-quote">欢迎进入企业资产管理系统！v1.0；登录时间：${LOGINTIME }；</blockquote>
+		<blockquote class="layui-elem-quote">欢迎进入企业资产管理系统！v1.0</blockquote>
 		<fieldset class="layui-elem-field">
 			<legend>信息总览</legend>
 			<div class="layui-field-box">
@@ -38,15 +38,15 @@
 					<tbody>
 						<tr>
 							<th width="30%">您的账号</th>
-							<td><span>${user.accountNumber }</span></td>
+							<td><span>${indexinfo.username }</span></td>
 						</tr>
 						<tr>
 							<td>您的姓名</td>
-							<td>${user.userName }</td>
+							<td>${indexinfo.name }</td>
 						</tr>
 						<tr>
 							<td>您的登录时间</td>
-							<td>${LOGINTIME }</td>
+							<td>${indexinfo.date }</td>
 						</tr>
 						<tr>
 							<td>您的浏览器信息</td>
@@ -54,7 +54,7 @@
 						</tr>
 						<tr>
 							<td>您的IP地址</td>
-							<td>${userIp }</td>
+							<td>${indexinfo.ip }</td>
 						</tr>
 					</tbody>
 				</table>
@@ -71,21 +71,20 @@
 						</tr>
 						<tr>
 							<td>服务器名称</td>
-							<td>${serverName }</td>
+							<td>${indexinfo.servicename }</td>
 						</tr>
 						<tr>
 							<td>服务器ip地址</td>
-							<td>${localIp }</td>
+							<td>${indexinfo.serviceip }</td>
 						</tr>
 						<tr class="spanLinkTr">
 							<td>当前在线人数</td>
-							<td><span id="sasd">加载中...</span>&nbsp; <span id="ronBtn" onclick="reOnlineNum()" class="spanLink">点击刷新</span>
-							</td>
+							<td><span id="osn">${onLineNum}</span>人</td>
 						</tr>
-						<tr>
-							<td>登录超时时间</td>
-							<td>${timeout }秒</td>
-						</tr>
+<%--						<tr>--%>
+<%--							<td>登录超时时间</td>--%>
+<%--							<td>${timeout }秒</td>--%>
+<%--						</tr>--%>
 						<tr class="spanLinkTr">
 							<td>服务器当前时间</td>
 							<td><span id="st">加载中...</span>&nbsp; <span id="rstBtn"
@@ -113,13 +112,26 @@
 		$("#browserVersion").text(userAgent);
 	}
 
+	// $(function () {
+	// 	$.ajax({
+	// 		url:"user/online.ajax",
+	// 		type: "post",
+	// 		dataType: "text",
+	// 		success:function (info) {
+	//
+	// 			$("#osn").text(info)
+	//
+	// 		}
+	// 	})
+	// })
+
 	function reServerTime() {
 		$("#rstBtn").attr("disabled", "disabled");
 		$("#rstBtn").css("display", "none");
 		//执行获取服务器时间的方法……
 		$.ajax({
 			type:"POST",
-			url:"indexController/getServerTime.ajax",
+			url:"user/getServerTime.ajax",
 			data:{
 				
 			},
@@ -140,27 +152,27 @@
 		$("#rstBtn").css("display", "inline");
 	}
 
-	function reOnlineNum() {
-		$("#ronBtn").attr("disabled", "disabled");
-		$("#ronBtn").css("display", "none");
-		//执行获取在线人数的方法……
-		$.ajax({
-			type:"POST",
-			url:"indexController/OnlineNum.ajax",
-			data:{
-				
-			},
-			dataType:"text",
-			success:function(ifo){
-				$("#sasd").text(ifo);
-			},
-			error:function(){
-				$("#sasd").text("获取失败");
-			}
-		});
-		//回弹按钮
-		setTimeout("popRonBtn()", 1000);
-	}
+	// function reOnlineNum() {
+	// 	$("#ronBtn").attr("disabled", "disabled");
+	// 	$("#ronBtn").css("display", "none");
+	// 	//执行获取在线人数的方法……
+	// 	$.ajax({
+	// 		type:"POST",
+	// 		url:"indexController/OnlineNum.ajax",
+	// 		data:{
+	//
+	// 		},
+	// 		dataType:"text",
+	// 		success:function(ifo){
+	// 			$("#sasd").text(ifo);
+	// 		},
+	// 		error:function(){
+	// 			$("#sasd").text("获取失败");
+	// 		}
+	// 	});
+	// 	//回弹按钮
+	// 	setTimeout("popRonBtn()", 1000);
+	// }
 
 	function popRonBtn() {
 		$("#ronBtn").removeAttr("disabled");
@@ -169,8 +181,8 @@
 
 	$(function() {
 		showBrowserVersion();
-		reOnlineNum();
-		reServerTime();
+		// reOnlineNum();
+		// reServerTime();
 	});
 </script>
 </html>

@@ -83,7 +83,7 @@
 						<a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人中心</a>
 					</dd>
 					<dd>
-						<a href="/pc/logout">退出登录</a>
+						<a href="/user/logouts.do">退出登录</a>
 					</dd>
 				</dl></li>
 			<li class="layui-nav-item to-index"><a href="index.jsp">系统首页</a></li>
@@ -137,18 +137,20 @@
 						class="iconfont nav_right">&#xe697;</i>
 				</a>
 					<ul class="sub-menu">
-						<li><a _href="selectAllBoorowBooks.do"> <i class="iconfont">&#xe6a7;</i> <cite>书库</cite>
-						</a></li>
+
 						<shiro:hasRole name="manager">
 						<li><a _href="brrowBook/selectAllBoorowBooks.do"> <i class="iconfont">&#xe6a7;</i> <cite>借阅列表</cite>
 						</a></li></shiro:hasRole>
 						<shiro:hasRole name="user">
+							<li><a _href="brrowBook/jieshu.do"> <i class="iconfont">&#xe6a7;</i> <cite>未还图书</cite>
+							</a></li>
+							<li><a _href="brrowBook/weihuan.do"> <i class="iconfont">&#xe6a7;</i> <cite>还书记录</cite>
+							</a></li>
 						<li><a _href="brrowBook/selectMyBoorowBooks.do"> <i class="iconfont">&#xe6a7;</i> <cite>借阅记录</cite>
 						<li><a _href="/book/evaluationform.do"> <i class="iconfont">&#xe6a7;</i> <cite>借阅超时</cite>
 						</a></li>
 						</shiro:hasRole>
-						<li><a _href="propertyController/showBorrowreturn.do"> <i class="iconfont">&#xe6a7;</i> <cite>已还</cite>
-						</a></li>
+
 					</ul></li>
 
 				<!-- 示例结束 -->

@@ -30,7 +30,7 @@ public class BorrowbooksServiceImpl implements BorrowbooksService {
 
     @Override
     public int updateById(Borrowbooks borrowbooks) {
-        return borrowbooksMapper.updateByPrimaryKeySelective(borrowbooks);
+        return borrowbooksMapper.updateByPrimary(borrowbooks);
     }
 
     @Override
@@ -50,8 +50,8 @@ public class BorrowbooksServiceImpl implements BorrowbooksService {
         return borrowbooksMapper.select(userid);
     }
 
-    public Borrowbooks selectbyid(Integer bookid) {
-        return borrowbooksMapper.selectByid(bookid);
+    public Borrowbooks selectbyid(Integer userid, Integer bookid) {
+        return borrowbooksMapper.selectByid(userid,bookid);
     }
 
     @Override
@@ -189,26 +189,8 @@ public class BorrowbooksServiceImpl implements BorrowbooksService {
         return borrowbooksMapper.deleteAllBook(asList);
     }
 
-    @Override
-    public int totaldown(Integer userid) {
-        return 0;
-    }
 
-    @Override
-    public int totaldowns(Integer count, Integer userid) {
-        return 0;
-    }
 
-    @Override
-    public int totalup(Integer bookid) {
-        return 0;
-    }
-
-    @Override
-    public int totalups(List<String> asList) {
-        return 0;
-    }
-/*
 
     @Override
     public int totaldown(Integer userid) {
@@ -230,7 +212,7 @@ public class BorrowbooksServiceImpl implements BorrowbooksService {
         return bm.totalups(asList);
     }
 
-*/
+
 
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserController {
     @Autowired
     private UserService us;
-  @RequestMapping("login")
+  @RequestMapping("login.do")
   public  String login(){
       return "login";
   }
@@ -81,4 +82,16 @@ if(falg)
 
         return us.sendEmail(email);
     }
+
+    @RequestMapping("logouts.do")
+    public String logouts(HttpServletRequest request){
+        System.out.println("xxxxx");
+        ServletContext context = request.getSession().getServletContext();
+        int online=(Integer) context.getAttribute("onLineNum")-1;
+        context.setAttribute("onLineNum",online);
+        Subject subject=SecurityUtils.getSubject();
+        subject.logout();
+        return "redirect:user/login.do";
+    }
+
 }

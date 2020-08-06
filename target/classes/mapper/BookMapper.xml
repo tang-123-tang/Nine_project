@@ -181,4 +181,21 @@
       )
     </trim>
   </delete>
+
+  <!--  还一本书book->sum怎加1-->
+  <update id="totalup" parameterType="java.lang.Integer">
+    UPDATE book SET sum=sum+1 WHERE bookId=#{bookid}
+  </update>
+  <!--  批量还书book->sum+-->
+  <update id="totalups" >
+    UPDATE book SET sum=sum+1
+    <trim prefix=" where" >
+      bookId in(
+      <foreach collection="list" item="x" separator=",">
+        #{x}
+      </foreach>
+      )
+    </trim>
+  </update>
+
 </mapper>

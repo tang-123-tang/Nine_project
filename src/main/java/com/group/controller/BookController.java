@@ -100,7 +100,7 @@ EvaluationService ev;
         Book book = service.selectByid(bookid);
         int a =borrowbooksService.select(userid);
         System.out.println(a);
-        Borrowbooks s=borrowbooksService.selectbyid(bookid);
+        Borrowbooks s=borrowbooksService.selectbyid(userid,bookid);
 
         if (s!=null){
             return "你已经借过这本书了！";

@@ -13,6 +13,7 @@ public interface BorrowbooksMapper {
 
     Borrowbooks selectByPrimaryKey(Integer id);
 
+    int updateByPrimary(Borrowbooks record);
     int updateByPrimaryKeySelective(Borrowbooks record);
 
     int updateByPrimaryKey(Borrowbooks record);
@@ -23,7 +24,7 @@ public interface BorrowbooksMapper {
     List<Borrowbooks> selectByUsernameByappraisal1();
     int select(Integer userid);
 
-    Borrowbooks selectByid(Integer bookid);
+    Borrowbooks selectByid(Integer userid, Integer bookid);
 
     List<Borrowbooks> queryAllBorrowBooks(Borrowbooks borrowbooks);
 

@@ -12,8 +12,7 @@
 <head>
     <title>图书页面</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/shouye.css" />
-    <script src="${pageContext.request.contextPath}/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/jquery-3.5.0.min.js"></script>
     <style>
         input{
             width: 100px;

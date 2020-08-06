@@ -114,7 +114,7 @@ appraisal is not null and appraisal !=''
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.group.pojo.Borrowbooks" >
+  <update id="updateByPrimary" parameterType="com.group.pojo.Borrowbooks" >
     update borrowbooks
     <set >
       <if test="userid != null" >
@@ -147,8 +147,8 @@ appraisal is not null and appraisal !=''
   <select id="select" resultType="java.lang.Integer" parameterType="java.lang.Integer">
    SELECT COUNT(state) FROM borrowbooks WHERE userId=#{userid} and state=1
   </select>
-  <select id="selectByid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
- SELECT bookId FROM borrowbooks WHERE bookId=#{bookid}
+  <select id="selectByid" resultMap="BaseResultMap" parameterType="java.lang.Integer"  >
+ SELECT bookId FROM borrowbooks WHERE bookId=#{1} and userId=#{0}
   </select>
 
 
@@ -170,4 +170,69 @@ appraisal is not null and appraisal !=''
   SELECT  <include refid="Base_Column_List" />
   FROM borrowbooks WHERE userId=#{userid} and state=1
   </select>
+
+
+  <!--添加-->
+  <!--未归还-->
+  <update id="returnAllBook">
+    UPDATE borrowbooks SET state=0
+    <trim prefix=" where">
+      id IN(
+      <foreach collection="list" item="x" separator=",">
+        #{x}
+      </foreach>
+      )
+    </trim>
+  </update>
+  <!--    归还-->
+
+  <update id="deleteAllBook">
+    UPDATE borrowbooks SET state=2
+    <trim prefix=" where">
+      id IN(
+      <foreach collection="list" item="x" separator=",">
+        #{x}
+      </foreach>
+      )
+    </trim>
+  </update>
+
+  <!--以归还-->
+  <select id="selectAllNoReturnBookByPage" resultMap="BaseResultMap" parameterType="com.group.pojo.Borrowbooks">
+  SELECT b.id,a.bookName,a.author,a.press,a.price,b.date FROM book a join borrowbooks b ON a.bookId=b.bookId
+  <trim prefix=" where" suffix=" " suffixOverrides="and">
+    b.userId=#{userid} and b.state=0 and
+    <if test="book.bookname!=null and book.bookname!=''">
+      a.bookName=#{book.bookname} and
+    </if>
+    <if test="book.author!=null and book.author!=''">
+      a.author=#{book.author} and
+    </if>
+    <if test="book.press!=null and book.press!=''">
+      a.press=#{book.press} and
+    </if>
+  </trim>
+  </select>
+  <!--    未归还-->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  SELECT b.id,b.bookId,a.picturePath,a.bookName,a.author,a.press,a.price,b.date FROM book a join borrowbooks b ON a.bookId=b.bookId
+  where  b.userId=#{userid} and b.state=1
+  </select>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.group.pojo.Borrowbooks">
+    update borrowbooks
+    <set>
+    state = 0,
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--    归还-->
+  <update id="updateById" parameterType="java.lang.Integer">
+    update borrowbooks
+    <set>
+    state = 2,
+    </set>
+    where id = #{id}
+  </update>
+
 </mapper>

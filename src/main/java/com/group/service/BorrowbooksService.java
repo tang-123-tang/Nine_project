@@ -17,7 +17,7 @@ public interface BorrowbooksService {
 
     int select(Integer userid);
 
-    Borrowbooks selectbyid(Integer bookid);
+    Borrowbooks selectbyid(Integer userid, Integer bookid);
 
     int deleteById(int id);
 
