@@ -82,7 +82,7 @@
             </div></td>
             <td >
               <%--  <a href="${pageContext.request.contextPath}${x.bookpath}" class="btn btn-success btn-sm">查看详情</a>
-              --%>  <a href="/static/css/xadmin.css" class="btn btn-success btn-sm">查看详情</a>
+              --%>  <a href="${x.bookpath}" class="btn btn-success btn-sm">查看详情</a>
             </td>
             <td >
                 <shiro:hasRole name="manager">

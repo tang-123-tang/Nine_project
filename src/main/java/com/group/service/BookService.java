@@ -17,4 +17,6 @@ public interface BookService {
     void update(Integer book);
 
     int del(List<String> list);
+
+    int addBook(Book book);
 }

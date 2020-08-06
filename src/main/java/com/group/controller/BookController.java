@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -249,5 +250,73 @@ EvaluationService ev;
         borrowbooks.setDate(date);
         int a= borrowbooksService.updateBybookid(borrowbooks);
         return "redirect:evaluationform.do";
+    }
+
+    /*添加书*/
+    @RequestMapping("bookList.do")
+    public String bookList(){
+        return "book/addBook";
+    }
+
+    @RequestMapping("addBook.do")
+    @ResponseBody
+    public String addBook( MultipartFile imgFile, MultipartFile document,Book book,HttpServletRequest request){
+        System.out.println("00000000"+imgFile.getSize());
+        System.out.println("00000000"+document.getSize());
+        System.out.println("11111111"+book);
+        //获取服务器地址
+        String realpath = request.getSession().getServletContext().getRealPath("/upload");
+        //Book book=new Book();
+        String img="",document0="";
+        try{
+//判断file数组不能为空并且长度大于0
+            if (document != null && document.getSize()> 0) {
+                //循环获取file数组中得文件
+
+                    //保存文件
+                    document0 = saveFile(document, realpath);
+
+            }
+            if (imgFile != null && imgFile.getSize()> 0) {
+                //循环获取file数组中得文件
+
+                    //保存文件
+                    img = saveFile(imgFile, realpath);
+
+            }
+
+            book.setPicturepath(img);
+            book.setBookpath(document0);
+
+            service.addBook(book);
+            return "添加成功";
+        }catch (Exception e){
+        }
+        return "null";
+    }
+
+    //保存文件
+    private String saveFile(MultipartFile file, String path) {
+        // 判断文件是否为空
+        String savePath;
+        if (!file.isEmpty()) {
+            try {
+                File filepath = new File(path);
+                if (!filepath.exists())
+                    filepath.mkdirs();
+                // 文件保存路径
+                String se=file.getOriginalFilename();
+
+                savePath = path +"/"+se;
+                // 转存文件
+                System.out.println(savePath);
+                file.transferTo(new File(savePath));
+                System.out.println("/upload/"+se);
+                return "/upload/"+se;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "";
     }
 }

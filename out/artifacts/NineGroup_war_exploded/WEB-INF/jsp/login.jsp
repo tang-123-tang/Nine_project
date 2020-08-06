@@ -90,7 +90,8 @@
                         <td>电话</td>
                         <td>
                             <input type="text" name="tel"  >
-                            <input type="hidden" name="role" value="eme">
+                            <input type="hidden" name="role" value="user">
+                            <input type="hidden" name="total" value="3">
                         </td>
                     </tr>
                     <tr>
@@ -194,7 +195,6 @@ function regist(){
 $("#one").modal("show");
 }
     function save() {
-        alert($("#form1").serialize())
         $.ajax({
             type:"post",
             url:"/user/regest.do",

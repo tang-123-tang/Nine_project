@@ -6,13 +6,16 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 
 @Controller
 @RequestMapping("user")
@@ -92,6 +95,69 @@ if(falg)
         Subject subject=SecurityUtils.getSubject();
         subject.logout();
         return "redirect:user/login.do";
+    }
+    @RequestMapping("userList.do")
+    public String userList(){
+        return "user/userList";
+    }
+
+    @RequestMapping("queryAllUser.do")
+    @ResponseBody
+    public HashMap<String,Object> queryAllUser(User user){
+
+        HashMap<String,Object> map = us.queryAllUser(user);
+        System.out.println("-----------map------"+map);
+        return map;
+    }
+
+    @RequestMapping("update.do")
+    public String update(String username, ModelMap model){
+        User user = us.selectByUsername(username);
+        System.out.println(user);
+        model.addAttribute("user",user);
+        return "user/update";
+    }
+
+
+    @RequestMapping("updateUser.do")
+    public String updataUser(User user,ModelMap model){
+        System.out.println(user);
+        if (us.updateByPrimaryKey(user)>0){
+            //刷新
+            HashMap map = us.queryAllUser(user);
+            model.addAttribute("info","修改成功");
+            return "welcome";
+        }else {
+            return "user/update";
+        }
+    }
+
+
+    @RequestMapping(value = "updateAjax.do",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
+    @ResponseBody  //由于加了ResponseBody，他会返回一个字符串
+    public HashMap upadate(User user){
+        System.out.println("---------updateAjax.do---------user="+user);
+        HashMap map = new HashMap();
+        if(us.updateByPrimaryKeySelective(user)>0){
+            map.put("info","修改成功");
+        }else{
+            map.put("info","修改失败");
+        }
+        return map;  ////由于加了@ResponseBody注解，他会返回一个字符串
+
+    }
+
+    @RequestMapping(value = "delete.do",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
+    @ResponseBody  //由于加了ResponseBody，他会返回一个字符串
+    public HashMap<String,Object> delete(@RequestParam("userid") int userid){
+        HashMap<String,Object> map = new HashMap();
+        if(us.delete(userid)>0){
+            map.put("info","删除成功");
+        }else{
+            map.put("info","删除失败");
+        }
+        return map;  ////由于加了@ResponseBody注解，他会返回一个字符串
+
     }
 
 }

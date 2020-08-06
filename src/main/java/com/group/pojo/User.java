@@ -1,6 +1,6 @@
 package com.group.pojo;
 
-public class User {
+public class User extends  Page{
     private Integer userid;
 
     private String username;

@@ -43,11 +43,11 @@
         </tr>
         <tr>
             <td>图书图片</td>
-            <td><input type="text" name="picturepath" value="${list.picturepath}"></td>
+            <td><img src="${list.picturepath}"></td>
         </tr>
         <tr>
             <td>图书查看</td>
-            <td><input type="text" name="bookpath" value="${list.bookpath}"></td>
+            <td><a href="${list.bookpath}">详情</td>
         </tr>
         <tr>
             <td><span style="color: red">${info}</span></td>

@@ -14,6 +14,12 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <script src="/static/js/jquery-3.5.0.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+    <style>
+        img{
+            width: 90px;
+            height: 80px;
+        }
+    </style>
 </head>
 <body onload="load(1)">
 <h4>
@@ -111,7 +117,7 @@
                         "<td align='center'>" + data.list[i].book.author + "</td>" +
                         "<td align='center'>" + data.list[i].book.press + "</td>" +
                         "<td align='center'>" + data.list[i].book.price + "</td>" +
-                        "<td align='center'>" + data.list[i].book.picturepath + "</td>" +
+                        "<td align='center'><img src='"+data.list[i].book.picturepath+"'></td>" +
                         "<td align=\"center\">" +commonTime+"</td>"+
                         "<td align='center'><button type='button' onclick='returnbook(this)'>点我还书</button><button><a href='#'>查看详情</a></button></td>" +
                         "</tr>"

@@ -130,4 +130,27 @@
     UPDATE user SET total=total-#{0} WHERE userid=#{1}
   </update>
 
+  <!--查询所有用户-->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.group.pojo.User" >
+  select
+  <include refid="Base_Column_List" />
+  from user
+  <trim prefix=" where" suffix=" " suffixOverrides="and">
+    <if test="username!='' and username!=null">
+      userName = #{username,jdbcType=VARCHAR} and
+    </if>
+    <if test="tel!='' and tel!=null">
+      tel=#{tel} and
+    </if>
+  </trim>
+  </select>
+
+  <!--通过用户名进行查询-->
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  select
+  <include refid="Base_Column_List" />
+  from user where userName = #{username,jdbcType=VARCHAR}
+  </select>
+
+
 </mapper>

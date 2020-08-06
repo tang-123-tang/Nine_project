@@ -96,22 +96,26 @@
 	<div class="left-nav">
 		<div id="side-nav">
 			<ul id="nav">
-				<shiro:hasRole name="manager">
+
 				<!-- 示例：这是一个下拉菜单 -->
 				<li><a href="javascript:;"> <i class="iconfont">&#xe6b8;</i> <cite>用户管理</cite> <i
 						class="iconfont nav_right">&#xe697;</i>
 				</a>
 					<ul class="sub-menu">
+						<shiro:hasRole name="manager">
 						<!-- 这是一个普通按钮 -->
-						<li><a _href="manageEmeController/toUserList.do"> <i
+						<li><a _href="/user/userList.do"> <i
 								class="iconfont">&#xe6a7;</i> <cite>所有信息</cite>
 						</a></li>
+						</shiro:hasRole>
 						<!-- 按钮结束 -->
-						<li><a _href="view/organization/organization-list.jsp"> <i
+						<shiro:hasRole name="user">
+						<li><a _href="/user/update.do?username=${userName}"> <i
 								class="iconfont">&#xe6a7;</i> <cite>修改密码</cite>
 						</a></li>
+						</shiro:hasRole>
 					</ul></li>
-				</shiro:hasRole>
+
 				<!-- 这组下拉菜单结束 -->
 
 				<!-- 这是另一组菜单示例 -->
@@ -121,7 +125,7 @@
 				</a>
 					<ul class="sub-menu">
 						<shiro:hasRole name="manager">
-						<li><a _href="roleController/toUserRole.do"> <i class="iconfont">&#xe6a7;</i> <cite>添加图书</cite>
+						<li><a _href="book/bookList.do"> <i class="iconfont">&#xe6a7;</i> <cite>添加图书</cite>
 						</a></li>
 						</shiro:hasRole>
 						<li><a _href="book/Library.do"> <i class="iconfont">&#xe6a7;</i> <cite>查询图书</cite>

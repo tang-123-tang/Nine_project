@@ -79,7 +79,7 @@
 						</tr>
 						<tr class="spanLinkTr">
 							<td>当前在线人数</td>
-							<td><span id="osn">${onLineNum}</span>人</td>
+							<td><span id="osn">${onLineNum}</span>人&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="reonline()">点击刷新</a> </td>
 						</tr>
 <%--						<tr>--%>
 <%--							<td>登录超时时间</td>--%>
@@ -184,5 +184,9 @@
 		// reOnlineNum();
 		// reServerTime();
 	});
+
+	function reonline() {
+		window.location.href="user/showWelcome.do";
+	}
 </script>
 </html>

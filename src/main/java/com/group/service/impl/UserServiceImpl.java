@@ -1,5 +1,7 @@
 package com.group.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.group.dao.UserMapper;
 import com.group.pojo.User;
 import com.group.service.UserService;
@@ -21,10 +23,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -250,4 +249,81 @@ public class UserServiceImpl implements UserService {
 
 
     }
+
+
+    //查询所有用户
+    @Override
+    public HashMap<String, Object> queryAllUser(User user) {
+        //1.设置每页的查询页码，每页显示的行数
+        PageHelper.startPage(user.getPage(),user.getRow());
+        //2.查询自定义sql
+        List<User> list = userMapper.selectByPage(user);
+        //3.转换成分页对象
+        PageInfo<User> pageInfo = new PageInfo<User>(list);
+
+        //构建数据类型
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        //结果集
+        map.put("list",pageInfo.getList());
+        //总条数
+        map.put("count",pageInfo.getTotal());
+        //获取上一页
+        map.put("prePage",pageInfo.getPrePage());
+        //获取下一页
+        map.put("nextPage",pageInfo.getNextPage());
+        //首页
+        map.put("indexPage",pageInfo.getFirstPage());
+        //末页
+        map.put("endPage",pageInfo.getLastPage());
+
+        map.put("allPage",pageInfo.getPageSize());
+
+        return map;
+    }
+
+    @Override
+    public User selectByUsername(String username) {
+        return userMapper.selectByUsername(username);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(User user) {
+
+        //加密测试代码
+        //设置加密方式
+        String algorithmName="MD5";
+        //设置待加密的原密码
+        Object source=user.getPassword();
+        //设置加盐方式(一般来说都是以用户名来加盐)
+        Object salt= ByteSource.Util.bytes(user.getUsername());
+        //加密次数
+        int hashIterations=1024;
+        SimpleHash newPassword=new SimpleHash(algorithmName, source, salt, hashIterations);
+
+        user.setPassword(newPassword.toString());
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    public int updateByPrimaryKey(User user) {
+        //加密测试代码
+        //设置加密方式
+        String algorithmName="MD5";
+        //设置待加密的原密码
+        Object source=user.getPassword();
+        //设置加盐方式(一般来说都是以用户名来加盐)
+        Object salt= ByteSource.Util.bytes(user.getUsername());
+        //加密次数
+        int hashIterations=1024;
+        SimpleHash newPassword=new SimpleHash(algorithmName, source, salt, hashIterations);
+
+        user.setPassword(newPassword.toString());
+        return userMapper.updateByPrimaryKey(user);
+    }
+
+    @Override
+    public int delete(int userid) {
+        return userMapper.deleteByPrimaryKey(userid);
+    }
+
 }

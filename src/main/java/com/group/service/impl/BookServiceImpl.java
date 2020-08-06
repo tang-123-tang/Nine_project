@@ -62,4 +62,9 @@ public class BookServiceImpl implements BookService {
     public int del(List<String> list) {
         return dao.del(list);
     }
+
+    @Override
+    public int addBook(Book book) {
+      return   dao.insert(book);
+    }
 }
