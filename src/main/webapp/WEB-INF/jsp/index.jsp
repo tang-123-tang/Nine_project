@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 <meta charset="UTF-8">
-<title>企业资产管理系统</title>
+<title>图书管理系统</title>
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/static/css/font.css">
 <link rel="stylesheet" href="/static/css/xadmin.css">
 <link rel="stylesheet" href="/static/css/cutsom-style.css">
-<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js"></script>
 <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/static/js/xadmin.js"></script>
 
@@ -52,7 +52,7 @@
 	<!-- 顶部开始 -->
 	<div class="container">
 		<div class="logo">
-			<a href="index.jsp">企业资产管理系统</a>
+			<a href="index.jsp">图书管理系统</a>
 		</div>
 		<div class="left_open">
 			<i title="展开左侧栏" class="iconfont">&#xe699;</i>
@@ -186,6 +186,18 @@
                         </ul></li>
 
 
+
+				<li><a href="javascript:;">
+					<i class="iconfont">&#xe613;</i>
+					<cite>统计管理</cite> <i
+						class="iconfont nav_right">&#xe697;</i>
+				</a>
+					<ul class="sub-menu">
+							<li><a _href="book/statictic.do"> <i class="iconfont">&#xe6a7;</i> <cite>统计</cite>
+							</a></li>
+
+
+					</ul></li>
 			</ul>
 		</div>
 	</div>

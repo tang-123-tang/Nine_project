@@ -19,4 +19,11 @@ public interface BookService {
     int del(List<String> list);
 
     int addBook(Book book);
+
+    void updateBybookid(Integer bookid);
+    //借阅统计
+    List<Book> getStatistic();
+
+    //借阅统计
+    List<Book> getStatistic2();
 }

@@ -125,7 +125,9 @@
             data: pe,
             dataType:"text",
             success: function (data){
-                alert(data)
+                alert(data);
+
+                window.location.reload();
             }
         });
     }
@@ -151,6 +153,7 @@
                 dataType:"text",
                 success:function (data) {
                         alert(data);
+                        window.location.reload();
                 }
             })
         }

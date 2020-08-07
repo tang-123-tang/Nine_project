@@ -35,9 +35,6 @@ public class BookController {
 EvaluationService ev;
     @RequestMapping(value = "one.do")
     public String one(MultipartFile  file ,MultipartFile  filee,Book book){
-        System.out.println(file+"dddd");
-        System.out.println(filee+"dddsdsdsd");
-        System.out.println(book);
         return "ond";
     }
     @RequestMapping(value = "one1.do")
@@ -97,10 +94,8 @@ EvaluationService ev;
         Integer userid = (Integer) request.getSession().getAttribute("userId");
         Integer bookid = borrowbooks.getBookid();
         borrowbooks.setUserid(userid);
-        System.out.println(userid);
         Book book = service.selectByid(bookid);
         int a =borrowbooksService.select(userid);
-        System.out.println(a);
         Borrowbooks s=borrowbooksService.selectbyid(userid,bookid);
 
         if (s!=null){
@@ -142,7 +137,7 @@ EvaluationService ev;
     //添加图书跳转页面
     @RequestMapping(value = "addpage.do")
     public String addpa(){
-        return "book/addbook";
+        return "book/addBook";
     }
     //添加图书跳转页面
     @RequestMapping(value = "/book/addbook.do")
@@ -240,6 +235,8 @@ EvaluationService ev;
     @RequestMapping("huanshu.do")
     public String huanshu(Borrowbooks borrowbooks){
         borrowbooks.setState(0);
+        Integer bookid = borrowbooks.getBookid();
+        service.updateBybookid(bookid);
         int a= borrowbooksService.updateBybookid(borrowbooks);
         return "redirect:evaluationform.do";
     }
@@ -258,12 +255,10 @@ EvaluationService ev;
         return "book/addBook";
     }
 
-    @RequestMapping("addBook.do")
+    @RequestMapping(value = "addBook.do",produces = "application/text;charset=utf-8")
     @ResponseBody
     public String addBook( MultipartFile imgFile, MultipartFile document,Book book,HttpServletRequest request){
-        System.out.println("00000000"+imgFile.getSize());
-        System.out.println("00000000"+document.getSize());
-        System.out.println("11111111"+book);
+
         //获取服务器地址
         String realpath = request.getSession().getServletContext().getRealPath("/upload");
         //Book book=new Book();
@@ -311,12 +306,47 @@ EvaluationService ev;
                 // 转存文件
                 System.out.println(savePath);
                 file.transferTo(new File(savePath));
-                System.out.println("/upload/"+se);
                 return "/upload/"+se;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return "";
+    }
+
+    @RequestMapping("statictic.do")
+    public String statictic(){
+        return "book/statictic";
+    }
+
+    @RequestMapping(value = "getStatictic.do",produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public List<Book> getStatictic(){
+        List<Book> mapList=service.getStatistic();
+        return mapList;
+    }
+
+    @RequestMapping(value = "getStatictic3.do",produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public List<Book> getStatictic3(){
+        List<Book> mapList=service.getStatistic2();
+        return mapList;
+    }
+
+    @RequestMapping(value = "getStatictic2.do",produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public HashMap<String ,Object> getStatictic2(){
+
+        HashMap<String ,Object> hashMap=new HashMap<String, Object>();
+        int i = userService.selectStatistic();
+        int i1 = userService.selectManCount();
+        //男生比例
+        double a=i1/(i*1.0);
+        System.err.println(a);
+        int c=i-i1;
+        double b=c/(i*1.0);
+        hashMap.put("NAN",a);
+        hashMap.put("NV",b);
+        return hashMap;
     }
 }

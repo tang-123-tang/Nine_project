@@ -14,7 +14,7 @@
     <base href="<%=basePath%>" />
     <meta charset="UTF-8">
 
-    <title>企业资产管理系统</title>
+    <title>图书管理系统</title>
     <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta http-equiv="Cache-Control" content="no-siteapp" />

@@ -26,7 +26,7 @@
         <tr ><td width="200">密码：</td><td><input name='password' type='text' id='xingming' value='' onblur='checkform()' class="form-control" />&nbsp;*<label id='clabelxingming' style='margin-top:16px;' /></td></tr>
         <tr ><td width="200">性别：</td><td><select name='sex' id='xingbie' class="form-control"><option value="${user.sex}">男</option><option value="${user.sex}">女</option></select></td></tr>
         <tr ><td width="200">电话：</td><td><input name='tel' type='text' id='dia' value='${user.tel}' onblur='checkform()' class="form-control" />&nbsp;*<label id='clabea' style='margin-top:16px;' /></td></tr>
-        <tr ><td width="200">权限：</td><td><input name='role' type='text' id='quanx' value='${user.role}' onblur='checkform()' class="form-control" />&nbsp;*<label id='clabeldianhua' style='margin-top:16px;' /></td></tr>
+        <tr ><td width="200">权限：</td><td><input name='role' type='text' id='quanx' value='${user.role}' onblur='checkform()' class="form-control"  readonly  unselectable="on" />&nbsp;*<label id='clabeldianhua' style='margin-top:16px;' /></td></tr>
       </td><td><input name='total' type='hidden' id='jiguan' value='${user.total}' onblur='' class="form-control" />
         <tr align='center'   height="22">
             <td width="25%" height="45"  align="right">&nbsp;</td>

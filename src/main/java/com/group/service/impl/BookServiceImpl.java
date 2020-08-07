@@ -67,4 +67,17 @@ public class BookServiceImpl implements BookService {
     public int addBook(Book book) {
       return   dao.insert(book);
     }
+
+    @Override
+    public void updateBybookid(Integer bookid) {
+        dao.updateByid(bookid);
+    }
+    public List<Book> getStatistic() {
+        return dao.getStatistic();
+
+    }
+
+    public List<Book> getStatistic2() {
+        return dao.getStatistic2();
+    }
 }

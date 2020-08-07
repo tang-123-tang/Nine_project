@@ -24,4 +24,8 @@ public interface UserService {
     int updateByPrimaryKey(User user);
 
     int delete(int userid);
+    //总个数
+    int selectStatistic();
+    //男生个数
+    int selectManCount();
 }

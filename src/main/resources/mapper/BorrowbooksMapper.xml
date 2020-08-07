@@ -148,7 +148,7 @@ appraisal is not null and appraisal !=''
    SELECT COUNT(state) FROM borrowbooks WHERE userId=#{userid} and state=1
   </select>
   <select id="selectByid" resultMap="BaseResultMap" parameterType="java.lang.Integer"  >
- SELECT bookId FROM borrowbooks WHERE bookId=#{1} and userId=#{0}
+ SELECT bookId FROM borrowbooks WHERE bookId=#{1} and userId=#{0} and state=1
   </select>
 
 

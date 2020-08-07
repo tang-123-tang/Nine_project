@@ -187,7 +187,7 @@
     UPDATE book SET sum=sum+1 WHERE bookId=#{bookid}
   </update>
   <!--  批量还书book->sum+-->
-  <update id="totalups" >
+  <update id="totalups"  >
     UPDATE book SET sum=sum+1
     <trim prefix=" where" >
       bookId in(
@@ -197,5 +197,25 @@
       )
     </trim>
   </update>
+  <update id="updateByid" parameterType="java.lang.Integer">
+    UPDATE book SET sum=sum+1
+    where bookId=#{bookid}
+  </update>
 
+  <select id="getStatistic" resultMap="BaseResultMap"  >
+  select
+count(1) as bookId,bookName
+from borrowbooks,book where book.bookId=borrowbooks.bookId
+group by
+borrowbooks.bookId
+  </select>
+
+  <select id="getStatistic2" resultMap="BaseResultMap"  >
+  select  year(date) as sum ,
+month(date) as price,
+count(1)as bookid
+from borrowbooks,book where book.bookId=borrowbooks.bookId
+group by year(date),
+month(date)
+  </select>
 </mapper>

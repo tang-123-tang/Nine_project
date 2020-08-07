@@ -225,7 +225,7 @@ public class UserServiceImpl implements UserService {
     public boolean sendEmail(String email) {
         SimpleMailMessage message = new SimpleMailMessage();
         //定义发送者邮件地址
-        message.setFrom(email);
+        message.setFrom("673424834@qq.com");
         //定义接受者邮件地址
         message.setTo(email);
         //定义邮件主题，就是邮件标题
@@ -324,6 +324,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public int delete(int userid) {
         return userMapper.deleteByPrimaryKey(userid);
+    }
+    //查询男生人数
+    public int selectManCount() {
+        User user= userMapper.selectManCount();
+        return user.getUserid() ;
+    }
+
+    //查询男女比例
+    public int selectStatistic() {
+        User user=userMapper.selectStatistic();
+        return user.getUserid() ;
     }
 
 }

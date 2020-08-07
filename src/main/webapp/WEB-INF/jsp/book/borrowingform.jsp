@@ -35,7 +35,7 @@
             <td>${x.date}</td>
             <td >未还</td>
             <td >
-                <a href="/book/huanshu.do?id=${x.id}" class="btn btn-success btn-sm">还书</a>
+                <a href="/book/huanshu.do?id=${x.id}&bookid=${x.bookid}" class="btn btn-success btn-sm">还书</a>
                 <a href="/book/xujie.do?id=${x.id}" class="btn btn-success btn-sm" style="background-color:blue">续借</a>
             </td>
         </tr>

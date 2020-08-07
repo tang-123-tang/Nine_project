@@ -152,5 +152,17 @@
   from user where userName = #{username,jdbcType=VARCHAR}
   </select>
 
+  <!--查询总人数-->
+  <select id="selectStatistic" resultMap="BaseResultMap"  >
+    select
+    count(*) as userid
+    from user
+
+  </select>
+  <!--//查询男生人数-->
+  <select id="selectManCount" resultMap="BaseResultMap"  >
+    SELECT COUNT(1) as userid FROM `user`  WHERE sex='男'
+
+  </select>
 
 </mapper>

@@ -27,4 +27,8 @@ public interface UserMapper {
     User selectByUsername(String username);
 
     List<User> selectByPage(User user);
+   //查询总人数
+    User selectStatistic();
+    //查询男生人数
+    User selectManCount();
 }

@@ -11,7 +11,7 @@
 <head>
     <title>Title</title>
     <script type="text/javascript"
-            src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+            src="https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js"></script>
     <script href="static/js/bootstrap.js"></script>
     <script href="static/lib/layui/layui.all.js"></script>
     <script href="static/lib/layui/layui.js"></script>
@@ -89,6 +89,7 @@
             processData: false,  //processData默认情况下会将发送的数据序列化以适应默认的内容类型application/x-www-form-urlencoded
             success:function (data) {
                 alert(data);
+                window.location.reload();
             },
             error:function (data) {
                 alert("失败");

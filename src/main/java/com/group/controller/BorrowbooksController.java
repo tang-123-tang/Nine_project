@@ -118,14 +118,14 @@ public class BorrowbooksController {
     //未归还
     @RequestMapping("/returnbook.ajax")
     @ResponseBody
-    public int returnbook(Borrowbooks borrowbooks,Integer bookid,Integer userid){
+    public int returnbook(Borrowbooks borrowbooks,Integer bookid,Integer userid,Integer bookid2){
         borrowbooks.setId(bookid);
         int info=borrowbook.returnBook(borrowbooks);
         if (info>0){
             //user表减少1
             borrowbook.totaldown(userid);
             //book表增加1
-            borrowbook.totalup(bookid);
+            borrowbook.totalup(bookid2);
         }
         return info;
     }

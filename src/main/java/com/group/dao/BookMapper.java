@@ -27,4 +27,8 @@ public interface BookMapper {
 
     int totalups(List<String> asList);
 
+    void updateByid(Integer bookid);
+    List<Book> getStatistic();
+
+    List<Book> getStatistic2();
 }
