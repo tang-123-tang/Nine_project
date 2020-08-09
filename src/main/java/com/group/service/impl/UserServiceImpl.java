@@ -98,6 +98,7 @@ public class UserServiceImpl implements UserService {
                 Set<String> roles = new HashSet<>();
                 //查询数据库得到用户的权限
                 String role = userMapper.queryPersonByPersonName(p.getUsername()).getRole();
+
                     roles.add(role);
                 s.getSession().setAttribute("roles",roles);
 
